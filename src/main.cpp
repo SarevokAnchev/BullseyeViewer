@@ -56,11 +56,12 @@ int main(int argc, char** argv)
     BulleyeDisplay disp(be);
 
     auto lut = vtkSmartPointer<vtkLookupTable>::New();
-    lut->SetTableRange(0., 10.);
-    lut->SetHueRange(0, 0.85);
+    lut->SetTableRange(min, max);
+    lut->SetHueRange(0.667, 0);
     lut->SetSaturationRange(1, 1);
     lut->SetValueRange(1, 1);
     lut->SetNanColor(0.8, 0.8, 0.8, 1);
+    lut->Build();
 
     auto mat = disp.draw("Values", lut);
 
