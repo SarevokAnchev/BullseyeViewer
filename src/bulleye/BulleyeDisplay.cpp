@@ -32,7 +32,7 @@ cv::Mat BulleyeDisplay::get_canva_scalars_interp(const std::string &label_) cons
     }
 
     KDTree<double> kd;
-    kd.add_nodes(coords, values);
+    kd.add_nodes(coords, values, true);
 
     cv::Mat interp_scalars(2*radius, 2*radius, CV_64F);
     interp_scalars.forEach<double>([&](double& value, const int position[]) -> void {
