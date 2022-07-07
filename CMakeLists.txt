@@ -31,7 +31,8 @@ add_executable(BullseyeViewer ${SOURCES})
 
 target_link_libraries(BullseyeViewer
         ${VTK_LIBRARIES}
-        nlohmann_json::nlohmann_json)
+        nlohmann_json::nlohmann_json
+        ${OpenCV_LIBS})
 
 vtk_module_autoinit(
         TARGETS BullseyeViewer
