@@ -11,13 +11,13 @@
 #include <vtkSmartPointer.h>
 #include <vtkLookupTable.h>
 
-#include "Bulleye.h"
+#include "Bullseye.h"
 
-class BulleyeDisplay {
+class BullseyeDisplay {
 private:
     const double BE_PI = 3.14159265358979323846;
 
-    std::shared_ptr<Bulleye> be;
+    std::shared_ptr<Bullseye> be;
 
     int radius=256;
 
@@ -30,7 +30,7 @@ private:
     void draw_segments(cv::Mat& canva) const;
 
 public:
-    explicit BulleyeDisplay(std::shared_ptr<Bulleye> be_);
+    explicit BullseyeDisplay(std::shared_ptr<Bullseye> be_);
 
     void show(const std::string& label_);
 

@@ -6,8 +6,8 @@
 
 #include <nlohmann/json.hpp>
 
-#include "bulleye/Bulleye.h"
-#include "bulleye/BulleyeDisplay.h"
+#include <bullseye/Bullseye.h>
+#include <bullseye/BullseyeDisplay.h>
 
 int main(int argc, char** argv)
 {
@@ -44,8 +44,8 @@ int main(int argc, char** argv)
     auto min = *mm.first;
     auto max = *mm.second;
 
-    auto config = BulleyeConfig::bulleye_18_segments;
-    auto be = std::make_shared<Bulleye>(config, apex_arr, base_arr, front_arr);
+    auto config = BullseyeConfig::bullseye_18_segments;
+    auto be = std::make_shared<Bullseye>(config, apex_arr, base_arr, front_arr);
 
     std::vector<std::tuple<double, double, double>> coords_scalars;
     for (const auto& c: coords) {
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
     }
     be->add_scalars("Values", coords_scalars, values);
 
-    BulleyeDisplay disp(be);
+    BullseyeDisplay disp(be);
 
     auto lut = vtkSmartPointer<vtkLookupTable>::New();
     lut->SetTableRange(min, max);

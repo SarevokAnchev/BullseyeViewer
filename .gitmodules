@@ -1,0 +1,3 @@
+[submodule "external/KDTree"]
+	path = external/KDTree
+	url = https://github.com/SarevokAnchev/KDTree.git

@@ -7,15 +7,15 @@
 #include <vector>
 #include <string>
 
-#include "BulleyeSegment.h"
+#include "BullseyeSegment.h"
 
-enum class BulleyeConfig {
-    bulleye_16_segments,
-    bulleye_17_segments,
-    bulleye_18_segments
+enum class BullseyeConfig {
+    bullseye_16_segments,
+    bullseye_17_segments,
+    bullseye_18_segments
 };
 
-class Bulleye {
+class Bullseye {
 private:
     const double BE_PI = 3.14159265358979323846;
     double apex[3] = {0, 0, 0};
@@ -27,7 +27,7 @@ private:
     int n_rings = 4;
     std::vector<int> n_segments = {1, 4, 6, 6};
 
-    std::vector<BulleyeSegment> segments;
+    std::vector<BullseyeSegment> segments;
 
     std::vector<std::vector<std::pair<double, double>>> scalars_coords;
     std::vector<std::vector<double>> scalars_values;
@@ -35,11 +35,11 @@ private:
 
 
 public:
-    Bulleye(BulleyeConfig cfg, const double* apex_, const double* axis_, double height, const double* anterior_axis);
-    Bulleye(int n_rings_, const int* n_segments_, const double* apex_, const double* axis_, double height, const double* anterior_axis_);
-    Bulleye(BulleyeConfig cfg, const double * apex, const double* base, const double* front);
+    Bullseye(BullseyeConfig cfg, const double* apex_, const double* axis_, double height, const double* anterior_axis);
+    Bullseye(int n_rings_, const int* n_segments_, const double* apex_, const double* axis_, double height, const double* anterior_axis_);
+    Bullseye(BullseyeConfig cfg, const double * apex, const double* base, const double* front);
 
-    [[nodiscard]] const BulleyeSegment* is_inside(double x, double y, double z) const;
+    [[nodiscard]] const BullseyeSegment* is_inside(double x, double y, double z) const;
 
     void polar_coordinates(double x, double y, double z, double& angle, double& radius) const;
 
@@ -59,7 +59,7 @@ public:
 
     [[nodiscard]] inline std::vector<int> get_n_segments() const { return n_segments; }
 
-    [[nodiscard]] std::vector<BulleyeSegment> get_segments() const { return segments; }
+    [[nodiscard]] std::vector<BullseyeSegment> get_segments() const { return segments; }
 
     [[nodiscard]] double get_height() const { return height; }
 

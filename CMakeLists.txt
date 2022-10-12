@@ -4,37 +4,37 @@ project(BullseyeViewer)
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCES
-        src/main.cpp
-        src/bulleye/Bulleye.cpp
-        src/bulleye/BulleyeSegment.cpp
-        src/bulleye/BulleyeDisplay.cpp)
+        src/Bullseye.cpp
+        src/BullseyeSegment.cpp
+        src/BullseyeDisplay.cpp)
 
-message(${CMAKE_BUILD_TYPE})
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(nlohmann_json_DIR "C:/Program Files (x86)/nlohmann_json/debug/lib/cmake/nlohmann_json")
-    set(VTK_DIR "C:/Program Files (x86)/VTK/debug/lib/cmake/vtk-9.0")
-    set(OpenCV_DIR "C:/Program Files (x86)/OpenCV/debug/x64/vc16/lib")
-endif (CMAKE_BUILD_TYPE STREQUAL "Debug")
-
-if (CMAKE_BUILD_TYPE STREQUAL "Release")
-    set(nlohmann_json_DIR "C:/Program Files (x86)/nlohmann_json/release/lib/cmake/nlohmann_json")
-    set(VTK_DIR "C:/Program Files (x86)/VTK/release/lib/cmake/vtk-9.0")
-    set(OpenCV_DIR "C:/Program Files (x86)/OpenCV/release/x64/vc16/lib")
-endif (CMAKE_BUILD_TYPE STREQUAL "Release")
+add_subdirectory(external/KDTree)
 
 find_package(VTK REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(OpenCV REQUIRED)
 
-add_executable(BullseyeViewer ${SOURCES})
+add_executable(BullseyeViewer src/main.cpp ${SOURCES})
+target_include_directories(BullseyeViewer PUBLIC include)
+
+add_library(bullseye ${SOURCES})
+target_include_directories(bullseye PUBLIC include)
 
 target_link_libraries(BullseyeViewer
-        ${VTK_LIBRARIES}
-        nlohmann_json::nlohmann_json
-        ${OpenCV_LIBS})
+        PRIVATE ${VTK_LIBRARIES}
+        PRIVATE nlohmann_json::nlohmann_json
+        PRIVATE ${OpenCV_LIBS}
+        PRIVATE kdtree)
+
+target_link_libraries(bullseye
+        PRIVATE ${VTK_LIBRARIES}
+        PRIVATE nlohmann_json::nlohmann_json
+        PRIVATE ${OpenCV_LIBS}
+        PRIVATE kdtree)
 
 vtk_module_autoinit(
-        TARGETS BullseyeViewer
+        TARGETS BullseyeViewer bullseye
         MODULES ${VTK_LIBRARIES}
 )
+
+install(TARGETS bullseye LIBRARY DESTINATION lib)

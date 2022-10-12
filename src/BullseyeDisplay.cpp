@@ -2,19 +2,19 @@
 // Created by Louis on 22/09/2021.
 //
 
-#include "BulleyeDisplay.h"
+#include <bullseye/BullseyeDisplay.h>
 
 #include <utility>
 
 #include <opencv2/opencv.hpp>
 
-#include "../kdtree/KDTree.h"
+#include <kdtree/KDTree.h>
 
-BulleyeDisplay::BulleyeDisplay(std::shared_ptr<Bulleye> be_)
-    : be(std::move(be_))
+BullseyeDisplay::BullseyeDisplay(std::shared_ptr<Bullseye> be_)
+        : be(std::move(be_))
 {}
 
-cv::Mat BulleyeDisplay::get_canva_scalars_interp(const std::string &label_) const
+cv::Mat BullseyeDisplay::get_canva_scalars_interp(const std::string &label_) const
 {
     std::vector<std::pair<double, double>> polar_coords;
     std::vector<double> values;
@@ -32,7 +32,7 @@ cv::Mat BulleyeDisplay::get_canva_scalars_interp(const std::string &label_) cons
     }
 
     KDTree<double> kd;
-    kd.add_nodes(coords, values, true);
+    kd.add_nodes(coords, values);
 
     cv::Mat interp_scalars(2*radius, 2*radius, CV_64F);
     interp_scalars.forEach<double>([&](double& value, const int position[]) -> void {
@@ -45,7 +45,7 @@ cv::Mat BulleyeDisplay::get_canva_scalars_interp(const std::string &label_) cons
     return interp_scalars;
 }
 
-cv::Mat BulleyeDisplay::get_canva_from_scalars(const cv::Mat &scalars, vtkSmartPointer<vtkLookupTable> lut) const
+cv::Mat BullseyeDisplay::get_canva_from_scalars(const cv::Mat &scalars, vtkSmartPointer<vtkLookupTable> lut) const
 {
     cv::Mat canva(scalars.rows, scalars.cols, CV_8UC3);
 
@@ -59,12 +59,12 @@ cv::Mat BulleyeDisplay::get_canva_from_scalars(const cv::Mat &scalars, vtkSmartP
     return canva;
 }
 
-void BulleyeDisplay::show(const std::string &label_)
+void BullseyeDisplay::show(const std::string &label_)
 {
     // TODO
 }
 
-void BulleyeDisplay::draw_segments(cv::Mat &canva) const
+void BullseyeDisplay::draw_segments(cv::Mat &canva) const
 {
     cv::Point center(radius - 1, radius - 1);
     auto n_segments = be->get_n_segments();
@@ -77,7 +77,7 @@ void BulleyeDisplay::draw_segments(cv::Mat &canva) const
     // draw segments
     // first segment always centered
     auto segments = be->get_segments();
-    for (BulleyeSegment& s: segments) {
+    for (BullseyeSegment& s: segments) {
         auto r = s.get_start_radius();
         auto a = s.get_start_angle() + BE_PI/2;
         auto l = s.get_height();
@@ -89,7 +89,7 @@ void BulleyeDisplay::draw_segments(cv::Mat &canva) const
     }
 }
 
-cv::Mat BulleyeDisplay::draw(const std::string &label_, vtkSmartPointer<vtkLookupTable> lut)
+cv::Mat BullseyeDisplay::draw(const std::string &label_, vtkSmartPointer<vtkLookupTable> lut)
 {
     auto scalars = get_canva_scalars_interp(label_);
 
@@ -100,5 +100,5 @@ cv::Mat BulleyeDisplay::draw(const std::string &label_, vtkSmartPointer<vtkLooku
     return canva;
 }
 
-void BulleyeDisplay::set_display_scalars_points(bool v_)
+void BullseyeDisplay::set_display_scalars_points(bool v_)
 {}

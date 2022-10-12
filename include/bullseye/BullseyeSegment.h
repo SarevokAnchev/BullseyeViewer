@@ -4,7 +4,7 @@
 
 #pragma once
 
-class BulleyeSegment {
+class BullseyeSegment {
 private:
     const double BE_PI = 3.14159265358979323846;
     double start_radius = 0;
@@ -14,7 +14,7 @@ private:
     double angle = BE_PI/2;
 
 public:
-    BulleyeSegment(double start_radius_, double radius_, double start_angle_, double angle_);
+    BullseyeSegment(double start_radius_, double radius_, double start_angle_, double angle_);
 
     [[nodiscard]] bool contains(double a, double r) const;
 
