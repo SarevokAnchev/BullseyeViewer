@@ -45,7 +45,6 @@ target_link_libraries(BullseyeViewer
 
 target_link_libraries(bullseye
         PRIVATE ${VTK_LIBRARIES}
-        PRIVATE nlohmann_json::nlohmann_json
         PRIVATE ${OpenCV_LIBS}
         PRIVATE kdtree)
 
