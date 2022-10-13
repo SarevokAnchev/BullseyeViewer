@@ -12,7 +12,7 @@ Bullseye::Bullseye(BullseyeConfig cfg, const double *apex_, const double *axis_,
 {
     switch (cfg) {
         case BullseyeConfig::bullseye_16_segments:
-            n_rings = 3;
+            n_rings = 4;
             n_segments = {1, 4, 6, 6};
             break;
         case BullseyeConfig::bullseye_17_segments:
@@ -97,7 +97,7 @@ Bullseye::Bullseye(BullseyeConfig cfg, const double *apex_, const double *base_,
 {
     switch (cfg) {
         case BullseyeConfig::bullseye_16_segments:
-            n_rings = 3;
+            n_rings = 4;
             n_segments = {1, 4, 6, 6};
             break;
         case BullseyeConfig::bullseye_17_segments:

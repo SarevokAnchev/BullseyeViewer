@@ -78,6 +78,7 @@ void BullseyeDisplay::draw_segments(cv::Mat &canva) const
     // first segment always centered
     auto segments = be->get_segments();
     for (BullseyeSegment& s: segments) {
+        if (s.get_angle_span() >= 2*BE_PI) continue;
         auto r = s.get_start_radius();
         auto a = s.get_start_angle() + BE_PI/2;
         auto l = s.get_height();
