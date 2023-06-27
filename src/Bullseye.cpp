@@ -4,6 +4,7 @@
 
 #include <bullseye/Bullseye.h>
 
+#include <tuple>
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
